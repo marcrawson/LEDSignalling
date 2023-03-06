@@ -1,60 +1,15 @@
 ; a2-signalling.asm
-; University of Victoria
-; CSC 230: Spring 2023
-; Instructor: Ahmad Abdullah
-;
-; Student name:
-; Student ID:
-; Date of completed work:
-;
-; *******************************
-; Code provided for Assignment #2 
-;
-; Author: Mike Zastre (2022-Oct-15)
-;
- 
-; This skeleton of an assembly-language program is provided to help you
-; begin with the programming tasks for A#2. As with A#1, there are "DO
-; NOT TOUCH" sections. You are *not* to modify the lines within these
-; sections. The only exceptions are for specific changes changes
-; announced on Brightspace or in written permission from the course
-; instructor. *** Unapproved changes could result in incorrect code
-; execution during assignment evaluation, along with an assignment grade
-; of zero. ****
 
 .include "m2560def.inc"
 .cseg
 .org 0
 
-; ***************************************************
-; **** BEGINNING OF FIRST "STUDENT CODE" SECTION ****
-; ***************************************************
-
-	; initializion code will need to appear in this
-    ; section
-
-	clr r18
-	;ldi r18, 0xFF
-	;sts DDRL, r18
-	;out DDRB, r18
-	clr r18
-
-
-
-; ***************************************************
-; **** END OF FIRST "STUDENT CODE" SECTION **********
-; ***************************************************
-
 ; ---------------------------------------------------
-; ---- TESTING SECTIONS OF THE CODE -----------------
-; ---- TO BE USED AS FUNCTIONS ARE COMPLETED. -------
-; ---------------------------------------------------
-; ---- YOU CAN SELECT WHICH TEST IS INVOKED ---------
-; ---- BY MODIFY THE rjmp INSTRUCTION BELOW. --------
-; -----------------------------------------------------
+; ---- TESTING SECTIONN OF THE CODE -----------------
+;----------------------------------------------------
 
-	rjmp test_part_a
-	; Test code
+;rjmp test_part_a
+; Test code
 
 
 test_part_a:
@@ -192,14 +147,9 @@ test_part_e:
 end:
     rjmp end
 
-
-
-
-
-
-; ****************************************************
-; **** BEGINNING OF SECOND "STUDENT CODE" SECTION ****
-; ****************************************************
+; ---------------------------------------------------
+; -------- CODE SECTION BEGINS HERE -----------------
+;----------------------------------------------------
 
 set_leds:
 
@@ -287,14 +237,6 @@ leds_with_speed:
 	ret
 
 
-; Note -- this function will only ever be tested
-; with upper-case letters, but it is a good idea
-; to anticipate some errors when programming (i.e. by
-; accidentally putting in lower-case letters). Therefore
-; the loop does explicitly check if the hyphen/dash occurs,
-; in which case it terminates with a code not found
-; for any legal letter.
-
 encode_letter:
 	pop r3 ; get input value pushed to stack
 	pop r4
@@ -345,6 +287,7 @@ encode_letter:
 	done: 
 		ret
 
+
 display_message:
 	push ZH ; push pointers to stack
 	push ZL
@@ -377,17 +320,6 @@ display_message:
 
 		ret
 
-
-; ****************************************************
-; **** END OF SECOND "STUDENT CODE" SECTION **********
-; ****************************************************
-
-
-
-
-; =============================================
-; ==== BEGINNING OF "DO NOT TOUCH" SECTION ====
-; =============================================
 
 ; about one second
 delay_long:
@@ -423,13 +355,6 @@ delay:
 	rcall delay_busywait
 	ret
 
-
-; This function is ONLY called from "delay", and
-; never directly from other code. Really this is
-; nothing other than a specially-tuned triply-nested
-; loop. It provides the delay it does by virtue of
-; running on a mega2560 processor.
-;
 delay_busywait:
 	push r16
 	push r17
@@ -460,7 +385,6 @@ delay_busywait_exit:
 
 ; Some tables
 .cseg
-;.org 0x600
 
 PATTERNS:
 	; LED pattern shown from left to right: "." means off, "o" means
@@ -503,8 +427,3 @@ WORD06: .db "OVER", 0, 0
 WORD07: .db "THE", 0
 WORD08: .db "LAZY", 0, 0
 WORD09: .db "DOG", 0
-
-; =======================================
-; ==== END OF "DO NOT TOUCH" SECTION ====
-; =======================================
-
